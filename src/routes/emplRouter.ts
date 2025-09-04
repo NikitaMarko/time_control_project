@@ -6,9 +6,9 @@ export const employeeRouter = express.Router();
 
 
 employeeRouter.patch("/password",controller.changePassword);
-employeeRouter.delete("/", controller.fireEmployee);
+employeeRouter.delete("/:empId", controller.fireEmployee);
 employeeRouter.put("/:empId", controller.updateEmployee);
 employeeRouter.post("/",controller.hireEmployee);
 employeeRouter.get("/:id",controller.getEmployeeById);
 employeeRouter.get("/", controller.getAllEmployees);
-employeeRouter.put("/roles", controller.setRole)
+employeeRouter.put("/roles/:id/:newRole", controller.setRole);

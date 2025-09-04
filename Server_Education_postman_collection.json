@@ -1,0 +1,1463 @@
+{
+	"info": {
+		"_postman_id": "87661645-e2ab-477c-947f-6d37b2d6074d",
+		"name": "Server Education",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43732172",
+		"_collection_link": "https://java-27-30.postman.co/workspace/Java-27-30~6536d94a-c706-44f3-9a72-6ee14f27658b/collection/43732172-87661645-e2ab-477c-947f-6d37b2d6074d?action=share&source=collection_link&creator=43732172"
+	},
+	"item": [
+		{
+			"name": "User Collection",
+			"item": [
+				{
+					"name": "removeUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 75\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":98,\r\n    \"userName\":\"Mitya\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/users?id=98",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "98"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":98,\r\n    \"userName\":\"Bite\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLoggerArray",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/logger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"logger"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post Collection",
+			"item": [
+				{
+					"name": "getAllPosts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddPost",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 470,\r\n\"userId\": 75,\r\n\"title\": \"Mouse\",\r\n\"text\": \"Tom  Jerry\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePost",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"Id\": \"28\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePost",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 470,\r\n\"userId\": 7,\r\n\"title\": \"11111\",\r\n\"text\": \"Tommorow will be new day rise\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/posts/post/470",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts",
+								"post",
+								"470"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPostsByUsername",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/posts/user?userName=Green",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"posts",
+								"user"
+							],
+							"query": [
+								{
+									"key": "userName",
+									"value": "Green"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book Collection",
+			"item": [
+				{
+					"name": "getAllBooks",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "300000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addBook",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "777777777",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"title\": \"Just\" ,\r\n    \"author\": \"Unknown\",\r\n    \"genre\": \"classic\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookByGenre",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/genre?genre=classic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"genre"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "classic"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeBook",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \"id\": \"3a731ad6-c9d8-4d7d-8bc1-bdbe983a4890\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickUpBook",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/pickup/7f96c862-29cd-4ba4-809b-4c069a1ce75c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"pickup",
+								"7f96c862-29cd-4ba4-809b-4c069a1ce75c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "returnBook",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3023/api/books/returnBook/3b3bc54e-d2f3-4dac-8188-1e9e596047c5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"returnBook",
+								"3b3bc54e-d2f3-4dac-8188-1e9e596047c5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBooksByGenreAndStatus",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/genre_status?genre=fantasy&status=on stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"genre_status"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "fantasy"
+								},
+								{
+									"key": "status",
+									"value": "on stock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookById",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/acf19cce-6982-4185-8ef0-a87dbfb36cd7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"acf19cce-6982-4185-8ef0-a87dbfb36cd7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBooksByReaderId",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/books_reader?readerId=333333333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"books_reader"
+							],
+							"query": [
+								{
+									"key": "readerId",
+									"value": "333333333"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBooksByTitlesAuthorAndGenre",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/books/books_title_author_genre?readerId=333333333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"books",
+								"books_title_author_genre"
+							],
+							"query": [
+								{
+									"key": "readerId",
+									"value": "333333333"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie Collection",
+			"item": [
+				{
+					"name": "getMoviesByGenres",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/movie/by-genres/Action,Comedy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"movie",
+								"by-genres",
+								"Action,Comedy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMoviesInLanguage",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/movie/movie-languages/Russian",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"movie",
+								"movie-languages",
+								"Russian"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMoviesWithLowerImdbThanTomatoes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/movie/lower-imdb-than-tomatoes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"movie",
+								"lower-imdb-than-tomatoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTopAwardedMovies",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/movie/top-awarded",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"movie",
+								"top-awarded"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "groupMoviesByImdbRatingFrom2010",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/api/movie/group-by-imdb-2010",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"api",
+								"movie",
+								"group-by-imdb-2010"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Readers",
+			"item": [
+				{
+					"name": "getAccount",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "user",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3023/accounts/reader/333333333",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"reader",
+								"333333333"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addAccount",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 333333333,\r\n  \"userName\": \"test\",\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"12345678\",\r\n  \"birthdate\": \"1989-01-01\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeAccount",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "100000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456789.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/accounts/200000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"200000000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "user",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n    \"id\":333333333,\r\n    \"newPassword\":\"12345678\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/accounts/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllAccount",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "400000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "admin",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3023/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeEmailNameAndBirthdate",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "333333333",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "user",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n  \"id\": 333333333,\r\n  \"newEmail\": \"MarkoTropoja@example.com\",\r\n  \"newUserName\": \"Marko\",\r\n  \"newBirthdate\": \"1990-12-12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/accounts/email-name-birthdate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"email-name-birthdate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeRoles",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "100000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456789.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":333333333,\r\n    \"newRoles\":[\"librarian\", \"user\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/accounts/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-role",
+								"value": "user",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n \"userId\":777777777,\r\n \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/accounts/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"accounts",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "hireEmployee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Pot\",\r\n    \"lastName\": \"Kip\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllEmployee(FireAt)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "300000000",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123123123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Evgen\",\r\n    \"lastName\": \"Prokhorov\",\r\n    \"password\": \"123456789\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmployeeById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\"\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee",
+								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fireEmployee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee",
+								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "setRole",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"6817ef15-088e-4fa8-b9d4-df1a589c6443\",\r\n    \"newRole\":\"crew\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee/roles/6817ef15-088e-4fa8-b9d4-df1a589c6443/crew",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee",
+								"roles",
+								"6817ef15-088e-4fa8-b9d4-df1a589c6443",
+								"crew"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEmployee",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Ford\",\r\n  \"lastName\": \"Harisson\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee",
+								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"empId\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\",\r\n  \"newPassword\": \"123456789\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/employee/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"employee",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

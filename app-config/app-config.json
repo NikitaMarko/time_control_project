@@ -1,6 +1,17 @@
 {
   "port": 3023,
-  "skipRoutes":[],
-  "pathRoles":{},
+  "skipRoutes":["POST/employee",
+    "GET/employee/:id"],
+
+  "pathRoles":{
+    "PUT/employee/roles/:id/:newRole":[],
+    "GET/employee": [],
+    "GET/employee/:id": [],
+    "POST/employee": [],
+    "PUT/employee/:empId": [],
+    "DELETE/employee/:empId": [],
+    "PATCH/employee/password" : []
+
+  },
   "checkIdRoutes": []
 }

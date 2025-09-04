@@ -34,6 +34,11 @@ export const convertEmpDtoToEmployee = (dto:EmployeeDto):Employee => {
         firstName:dto.firstName,
         lastName:dto.lastName,
         passHash:hash,
-        roles: [Roles.CREW]
-    }
-}
+        roles: [Roles.CREW],
+        wasActiveWorking: [
+            {
+                start: new Date()
+            }
+        ]
+    };
+};
