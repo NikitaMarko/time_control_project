@@ -6,6 +6,7 @@ import morgan from "morgan";
 import {Roles} from "./model/Employee.js";
 import {errorHandler} from "./errorHandler/errorHandler.js";
 import {employeeRouter} from "./routes/emplRouter.js";
+import {shiftCtrlRouter} from "./routes/shiftCtrlRouter.js";
 
 export const launchServer = () => {
     //===========load environments==============
@@ -24,6 +25,7 @@ export const launchServer = () => {
 
 //==================Router====================
     app.use('/employee', employeeRouter)
+    app.use('/shift', shiftCtrlRouter)
     app.use((req, res) => {
         res.status(404).send("Page not found")
     })
