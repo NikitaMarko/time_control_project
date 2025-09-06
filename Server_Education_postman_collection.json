@@ -1299,21 +1299,14 @@
 				},
 				{
 					"name": "getEmployeeById",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\"\r\n    \r\n}"
-						},
 						"url": {
-							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"raw": "http://localhost:3023/employee/ba56a283-ceb8-42ad-81b9-69937007e2aa",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1321,7 +1314,7 @@
 							"port": "3023",
 							"path": [
 								"employee",
-								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+								"ba56a283-ceb8-42ad-81b9-69937007e2aa"
 							]
 						}
 					},
@@ -1337,7 +1330,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"id\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\"\r\n}",
+							"raw": "{\r\n   \"empId\": \"5d58df22-e9ca-4f73-abb7-eb9d85a48a7e\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1345,7 +1338,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"raw": "http://localhost:3023/employee/5d58df22-e9ca-4f73-abb7-eb9d85a48a7e",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1353,7 +1346,7 @@
 							"port": "3023",
 							"path": [
 								"employee",
-								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+								"5d58df22-e9ca-4f73-abb7-eb9d85a48a7e"
 							]
 						}
 					},
@@ -1367,17 +1360,8 @@
 						},
 						"method": "PUT",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\":\"6817ef15-088e-4fa8-b9d4-df1a589c6443\",\r\n    \"newRole\":\"crew\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:3023/employee/roles/6817ef15-088e-4fa8-b9d4-df1a589c6443/crew",
+							"raw": "http://localhost:3023/employee/roles/ba56a283-ceb8-42ad-81b9-69937007e2aa/manager",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1386,8 +1370,8 @@
 							"path": [
 								"employee",
 								"roles",
-								"6817ef15-088e-4fa8-b9d4-df1a589c6443",
-								"crew"
+								"ba56a283-ceb8-42ad-81b9-69937007e2aa",
+								"manager"
 							]
 						}
 					},
@@ -1435,7 +1419,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"empId\": \"6817ef15-088e-4fa8-b9d4-df1a589c6443\",\r\n  \"newPassword\": \"123456789\"\r\n}\r\n",
+							"raw": "{\r\n  \"empId\": \"ba56a283-ceb8-42ad-81b9-69937007e2aa\",\r\n  \"newPassword\": \"123456789\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
