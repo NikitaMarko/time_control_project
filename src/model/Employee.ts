@@ -8,23 +8,23 @@ export type EmployeeDto = {
 export type Employee = {
     firstName: string,
     lastName: string,
-    passHash?: string,
-    id: string,
-    roles: Roles[],
-    wasActiveWorking: wasActiveWorking[]
+    _id: string,
+    table_num: string,
+    hash: string,
+    roles: Roles
 }
 
 export type SavedFiredEmployee = {
-    id: string;
-    firstName: string;
-    lastName: string;
-    roles: Roles[];
-    wasActiveWorking: wasActiveWorking[]
-};
+    firstName: string,
+    lastName: string,
+    _id: string,
+    table_num: string,
+    fireDate?: string,
+}
 
-export type wasActiveWorking = {
-    start: Date;
-    end?: Date;
+export type EmployeeUpdates = {
+    firstName: string,
+    lastName: string
 }
 
 export enum Roles {

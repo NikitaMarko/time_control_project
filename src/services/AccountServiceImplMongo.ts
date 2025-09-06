@@ -1,158 +1,62 @@
 import {AccountingService} from "./AccountService.js";
 import {Employee, EmployeeDto, Roles, SavedFiredEmployee} from "../model/Employee.js";
-import {EmployeeModel} from "../model/EmployeeMongooseSchema.js";
+import {EmployeeModel, FiredEmployeeModel} from "../model/EmployeeMongooseSchema.js";
 import {HttpError} from "../errorHandler/HttpError.js";
+import {checkRole, convertEmployeeToFiredEmployee} from "../utils/tools.js";
 import bcrypt from "bcrypt";
 
 
 
-export class AccountServiceImplMongo implements AccountingService{
+export class AccountServiceImplMongo implements AccountingService {
 
     async changePassword(empId: string, newPassword: string): Promise<void> {
         const result = await EmployeeModel.findById(empId).exec();
-        if(!result) throw new HttpError(400, "Employee not found");
-        result.passHash = bcrypt.hashSync(newPassword, 10);
+        if (!result) throw new HttpError(404, `Employee with ${empId} not found`);
+        result.hash = await bcrypt.hash(newPassword, 10);
         await result.save();
     }
 
     async fireEmployee(empId: string): Promise<SavedFiredEmployee> {
-        const fireEmp = await EmployeeModel.findById(empId);
-        if (!fireEmp) throw new HttpError(404, "Employee not found");
-
-        const last = fireEmp.wasActiveWorking[fireEmp.wasActiveWorking.length - 1];
-        if (!last || last.end) throw new HttpError(400, "Employee already fired or no active period found");
-
-        last.end = new Date();
-        await fireEmp.save();
-
-        const saved = fireEmp.toObject();
-        return {
-            id: saved._id,
-            firstName: saved.firstName,
-            lastName: saved.lastName,
-            roles: (saved.roles as string[]).filter((r): r is Roles =>
-                Object.values(Roles).includes(r as Roles)
-            ),
-            wasActiveWorking: saved.wasActiveWorking.map(({ start, end }) => ({
-                start,
-                end: end ?? undefined
-            }))
-        };
+        const fireEmp = await EmployeeModel.findByIdAndDelete(empId);
+        if (!fireEmp) throw new HttpError(404, `Employee with ${empId} not found`);
+        const fired: SavedFiredEmployee = convertEmployeeToFiredEmployee(fireEmp as Employee);
+        const firedDoc = new FiredEmployeeModel(fired);
+        await firedDoc.save()
+        return fired;
     }
 
     async getAllEmployees(): Promise<SavedFiredEmployee[]> {
-        const firedEmpDocs = await EmployeeModel.find({
-            wasActiveWorking: {
-                $elemMatch: {
-                    end: { $lt: new Date() }
-                }
-            }
-        }).lean().exec();
-
-        return firedEmpDocs
-            .map(emp => ({
-            id: emp._id,
-            firstName: emp.firstName,
-            lastName: emp.lastName,
-            roles: (emp.roles as string[]).filter((r): r is Roles =>
-                Object.values(Roles).includes(r as Roles)
-            ),
-                wasActiveWorking: Array.isArray(emp.wasActiveWorking)
-                    ? emp.wasActiveWorking.map(w => ({
-                        start: new Date(w.start),
-                        end: (w.end !== null && w.end !== undefined) ? new Date(w.end) : undefined
-                    }))
-                    : []
-        }));
+        return await FiredEmployeeModel.find({}).exec() as SavedFiredEmployee[];
     }
 
     async getEmployeeById(id: string): Promise<Employee> {
-        const result = await EmployeeModel.findOne({_id: id}).lean().exec();
-        if(!result) throw new HttpError(404, `Employee with ${id} not found`);
-        return result as unknown as Employee;
+        const employee = await EmployeeModel.findById(id).exec();
+        if (!employee)
+            throw new HttpError(404, `Employee with id ${id} not found`);
+        return employee;
     }
 
     async hireEmployee(employee: Employee): Promise<Employee> {
-        if (employee.id) {
-            const existing = await EmployeeModel.findById(employee.id);
-            if (existing) throw new HttpError(409, "Employee already exists");
-        }
-
-        const employeeDoc = new EmployeeModel({
-            _id: employee.id,
-            firstName: employee.firstName,
-            lastName: employee.lastName,
-            passHash: employee.passHash,
-            roles: employee.roles,
-            wasActiveWorking: [
-                {
-                    start: new Date()
-                }
-            ]
-        });
-
-        await employeeDoc.save();
-        const saved = employeeDoc.toObject();
-
-        return  {
-            id: saved._id,
-            firstName: saved.firstName,
-            lastName: saved.lastName,
-            passHash: saved.passHash,
-            roles: (saved.roles as string[]).filter(
-                (role): role is Roles => Object.values(Roles).includes(role as Roles)
-            ),
-            wasActiveWorking: saved.wasActiveWorking.map(w => ({
-                start: new Date(w.start),
-                end: w.end ? new Date(w.end) : undefined
-            }))
-        };
+        const temp = await EmployeeModel.findById(employee._id).exec();
+        if (temp) throw new HttpError(409, `Employee with id ${employee._id} already exists`);
+        const empDoc = new EmployeeModel(employee);
+        await empDoc.save();
+        return employee;
     }
 
     async setRole(id: string, newRole: string): Promise<Employee> {
         if (!Object.values(Roles).includes(newRole as Roles)) {
-            throw new HttpError(400, `Invalid role: ${newRole}`);
+            throw new HttpError(400, "Invalid role");
         }
-        const result = await EmployeeModel.findByIdAndUpdate(id, {roles: [newRole]}, {new: true});
-        if(!result) throw new HttpError(404, `Employee with ${id} not found`);
-        const saved = result.toObject();
-        const { passHash, ...newObj } = saved;
-
-        return {
-            id: newObj._id,
-            firstName: newObj.firstName,
-            lastName: newObj.lastName,
-            roles: (newObj.roles as string[]).filter(
-                (r): r is Roles => Object.values(Roles).includes(r as Roles)
-            ),
-            wasActiveWorking: newObj.wasActiveWorking.map((item: any) => ({
-                start: new Date(item.start),
-                end: item.end ? new Date(item.end) : undefined
-            }))
-        };
+        const updated = await EmployeeModel.findOneAndUpdate({_id:id}, {roles:newRole},{new:true}).exec();
+        if (!updated) throw new HttpError(404, "Account not found");
+        return updated as unknown as Employee;
     }
 
     async updateEmployee(empId: string, employee: EmployeeDto): Promise<Employee> {
-        const updEmployee = await EmployeeModel.findByIdAndUpdate(empId, {
-            firstName: employee.firstName,
-            lastName: employee.lastName
-        }, {new: true})
-        if (!updEmployee) throw new HttpError(404, `Employee with id ${empId} not found`);
-        const updated = updEmployee.toObject();
-        const {passHash, ...safeEmpl} = updated;
-        return {
-            id: safeEmpl._id,
-            firstName: safeEmpl.firstName,
-            lastName: safeEmpl.lastName,
-            roles: (safeEmpl.roles as string[]).filter((r): r is Roles =>
-                Object.values(Roles).includes(r as Roles)
-            ),
-            wasActiveWorking: safeEmpl.wasActiveWorking.map(({start, end}) => ({
-                start: new Date(start),
-                end: end ? new Date(end) : undefined
-            }))
-        };
-
+        const emp = await EmployeeModel.findByIdAndUpdate({_id:empId},employee,{new:true}).exec();
+        if(!emp) throw new HttpError(404, `Employee with id ${empId} not found`);
+        return emp
     }
 }
 

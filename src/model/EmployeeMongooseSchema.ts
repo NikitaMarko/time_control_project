@@ -1,24 +1,25 @@
 import * as mongoose from "mongoose";
-import {Roles} from "./Employee.js";
+import {Employee, Roles} from "./Employee.js";
 import { v4 as uuidv4 } from 'uuid';
 
 
-const employeeMongooseSchema = new mongoose.Schema({
+export const EmployeeMongoSchema = new mongoose.Schema({
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
     _id: { type: String, default: () => uuidv4() },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    passHash: { type: String, required: true },
-    roles: { type: [String], enum: Object.values(Roles), required: true },
-    wasActiveWorking: {
-        type: [
-            {
-                start: { type: Date, required: true },
-                end: { type: Date, required: false }
-            }
-        ],
-        default: []
-    }
-}, { _id: false });
+    table_num:{type:String, required: true},
+    roles:{type:String, enum: Roles, required: true},
+    hash:{type:String, required: true},
+})
 
+export const EmployeeModel = mongoose.model<Employee>('Employees', EmployeeMongoSchema, 'employees_accounting')
 
-export const EmployeeModel = mongoose.model('Employee', employeeMongooseSchema, 'employee_collection')
+export const FiredEmployeeMongoSchema = new mongoose.Schema({
+    firstName: {type: String, required: true},
+    lastName: {type: String, required: true},
+    _id: { type: String, default: () => uuidv4() },
+    table_num:{type:String, required: true},
+    fireDate: {type:String, required: true}
+})
+
+export const FiredEmployeeModel = mongoose.model('Fired', FiredEmployeeMongoSchema, 'fired_emp_collection')
