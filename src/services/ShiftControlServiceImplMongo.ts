@@ -10,7 +10,7 @@ import {HttpError} from "../errorHandler/HttpError.js";
 export class ShiftControlServiceImplMongo implements ShiftControlService {
 
     async breaks(table_num: string, breakDuration: number): Promise<void> {
-        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num});
+        const currentShift = await CrewShiftMongoModel.findOne({table_num});
         if (!currentShift)
             throw new HttpError(404, `No find active shift for ${table_num}`)
         const break15 = 15;
@@ -24,7 +24,7 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
     }
 
     async correctShift(correct: ShiftCorrection): Promise<void> {
-        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num:correct.crew_table_num})
+        const currentShift = await CrewShiftMongoModel.findOne({table_num:correct.crew_table_num})
         if (!currentShift)
             throw new HttpError(404, `No find active shift for ${correct.crew_table_num}`)
         const now = new Date();
@@ -41,7 +41,7 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
     }
 
     async finishShift(table_num: string): Promise<{ table_num: string; time: number }> {
-        const currentShift = await CrewShiftMongoModel.findOne({table_num});
+        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num});
         if (!currentShift) {
             throw new HttpError(404, `No find active shift for ${table_num}`);
         }

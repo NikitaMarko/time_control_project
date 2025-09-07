@@ -22,5 +22,5 @@ export type ShiftCorrection = {
     manager_table_num: string;
     startShift: number;
     finishShift: number;
-    date: string;
+    date?: string;
 };

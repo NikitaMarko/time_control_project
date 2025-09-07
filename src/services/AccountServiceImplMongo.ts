@@ -2,7 +2,7 @@ import {AccountingService} from "./AccountService.js";
 import {Employee, EmployeeDto, Roles, SavedFiredEmployee} from "../model/Employee.js";
 import {EmployeeModel, FiredEmployeeModel} from "../model/EmployeeMongooseSchema.js";
 import {HttpError} from "../errorHandler/HttpError.js";
-import {checkRole, convertEmployeeToFiredEmployee} from "../utils/tools.js";
+import {convertEmployeeToFiredEmployee} from "../utils/tools.js";
 import bcrypt from "bcrypt";
 
 
