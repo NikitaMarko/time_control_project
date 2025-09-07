@@ -1442,6 +1442,185 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "ShiftControl",
+			"item": [
+				{
+					"name": "getCurrentShiftStaff",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/shift/staff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCurrentActivityShift",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3023/shift/activity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "startShift",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/shift/start_staff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"start_staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "finishShift",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/shift/finish_staff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"finish_staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "breaks",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\",\r\n    \"breakDuration\":15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/shift/breaks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"breaks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "correctShift",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"crew_table_num\":\"TAB-1757156371744\",\r\n    \"manager_table_num\":\"MNG-100000000\",\r\n    \"startShift\":1757272149229,\r\n    \"finishShift\":1757272149235\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3023/shift/correct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3023",
+							"path": [
+								"shift",
+								"correct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
