@@ -1,16 +1,23 @@
 {
   "port": 3023,
   "skipRoutes":["POST/employee",
-    "GET/employee/:id"],
+    "GET/employee/:id","GET/shift/activity", "GET/shift/staff"],
 
   "pathRoles":{
-    "PUT/employee/roles/:id/:newRole":[],
-    "GET/employee": [],
-    "GET/employee/:id": [],
-    "POST/employee": [],
-    "PUT/employee/:empId": [],
-    "DELETE/employee/:empId": [],
-    "PATCH/employee/password" : []
+    "PUT/employee/roles/:id/:newRole":["supervisor"],
+    "GET/employee":["manager","hr"],
+    "GET/employee/:id":["manager","hr","crew"],
+    "POST/employee":["hr"],
+    "PUT/employee/:empId":["hr"],
+    "DELETE/employee/:empId":["hr"],
+    "PATCH/employee/password":["crew"],
+
+    "GET/shift/activity":["manager","hr"],
+    "GET/shift/staff":["manager","hr"],
+    "PUT/shift/correct":["supervisor"],
+    "PATCH/shift/breaks":["manager","hr"],
+    "PUT/shift/start_staff":["manager","hr","crew"],
+    "PUT/shift/finish_staff":["manager","hr","crew"]
 
   },
   "checkIdRoutes": []
