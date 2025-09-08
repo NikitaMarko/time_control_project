@@ -5,7 +5,7 @@ import {HttpError} from "../errorHandler/HttpError.js";
 
 export const startShift = async (req: Request, res: Response) => {
     const {table_num} = req.body;
-    if (!table_num || typeof table_num !== "string") {
+    if (!table_num) {
         throw new HttpError(400, 'No correct table num');
     }
     const result = await service.startShift(table_num);
@@ -13,7 +13,7 @@ export const startShift = async (req: Request, res: Response) => {
 }
 export const finishShift= async (req: Request, res: Response) => {
     const {table_num} = req.body;
-    if (!table_num || typeof table_num !== "string") {
+    if (!table_num) {
         throw new HttpError(400, 'No correct table num');
     }
     const result = await service.finishShift(table_num);
@@ -21,7 +21,7 @@ export const finishShift= async (req: Request, res: Response) => {
 }
 export const breaks= async (req: Request, res: Response) => {
     const {table_num, breakDuration} = req.body;
-    if (!table_num || typeof table_num !== "string" && typeof breakDuration !== "number") {
+    if (!table_num) {
         throw new HttpError(400, 'No correct data');
     }
     const result = await service.breaks(table_num, breakDuration);

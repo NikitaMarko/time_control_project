@@ -10,7 +10,7 @@ import {HttpError} from "../errorHandler/HttpError.js";
 export class ShiftControlServiceImplMongo implements ShiftControlService {
 
     async breaks(table_num: string, breakDuration: number): Promise<void> {
-        const currentShift = await CrewShiftMongoModel.findOne({table_num});
+        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num});
         if (!currentShift)
             throw new HttpError(404, `No find active shift for ${table_num}`)
         const break15 = 15;
@@ -48,8 +48,8 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
         const {quantityShift} = await this.getCurrentActivityShift(table_num);
         const finish = Date.now();
 
-        const duration = finish - currentShift.startShift - currentShift.breaks*60000;
-        const monthHours = duration*quantityShift;
+        const duration = ((finish - currentShift.startShift) - (currentShift.breaks*60000))/60000;
+        const monthHours = (duration*quantityShift)/60;
 
         const result = new CrewShiftMongoModel({
             shift_id:currentShift.shift_id,
@@ -71,7 +71,10 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
     }
 
     async startShift(table_num: string): Promise<{ table_num: string; time: number }> {
+        const isExistShift = await CurrCrewShiftMongoModel.findOne({table_num})
+        if (isExistShift) throw new HttpError(400, `Already have shift for crew with ${table_num}`);
         const now = Date.now();
+
         const startShift =  new CurrCrewShiftMongoModel({
             shift_id: now,
             startShift: now,
