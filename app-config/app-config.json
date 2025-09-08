@@ -20,5 +20,7 @@
     "PUT/shift/finish_staff":["manager","hr","crew"]
 
   },
-  "checkIdRoutes": []
+  "checkIdRoutes": [
+    "GET/employee/:id","PATCH/employee/password"
+  ]
 }
