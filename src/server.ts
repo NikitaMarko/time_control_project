@@ -6,6 +6,7 @@ import morgan from "morgan";
 import {errorHandler} from "./errorHandler/errorHandler.js";
 import {employeeRouter} from "./routes/emplRouter.js";
 import {shiftCtrlRouter} from "./routes/shiftCtrlRouter.js";
+import {checkAccountById} from "./middleware/authorization.js";
 
 export const launchServer = () => {
     //===========load environments==============
@@ -14,14 +15,15 @@ export const launchServer = () => {
 
     const logStream = fs.createWriteStream('access.log', {flags:'a'});
 //==================Middleware================
+
+    app.use(morgan('dev'));
+    app.use(morgan('combined', {stream:logStream}))
     app.use(express.json());
+    // app.use(queryLimiter);
     // app.use(authenticate(accountServiceMongo));
     // app.use(skipRoutes(configuration.skipRoutes));
     // app.use(authorize(configuration.pathRoles as Record<string, Roles[]>));
-    // app.use(queryLimiter);
-    // app.use(checkAccountById(configuration.checkIdRoutes));
-    app.use(morgan('dev'));
-    app.use(morgan('combined', {stream:logStream}))
+    app.use(checkAccountById(configuration.checkIdRoutes));
 
 //==================Router====================
     app.use('/employee', employeeRouter)

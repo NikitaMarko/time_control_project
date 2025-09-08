@@ -1,5 +1,4 @@
 //
-// import {AuthRequest, Roles} from "../utils/libTypes.js";
 // import {RequestHandler} from "express";
 // import {HttpError} from "../errorHandler/HttpError.js";
 //
@@ -18,15 +17,27 @@
 //     };
 // };
 //
-//     export  const checkAccountById = (checkPathId:string[]): RequestHandler => {
-//         return (req, res, next)=> {
-//             const authReq = req as AuthRequest;
-//             const route = authReq.method + authReq.path;
-//             const roles = authReq.roles;
-//             if(!roles || !checkPathId.includes(route) || (!roles!.includes(Roles.ADMIN)
-//                 && roles!.includes(Roles.USER)
-//                 && authReq.userId == authReq.body.id))
-//                 next();
-//             else throw new HttpError(403, "You can modify only your own account")
-//         }
-//     }
+import {RequestHandler} from "express";
+import {AuthRequest} from "../utils/emplTypes.js";
+import {Roles} from "../model/Employee.js";
+import {HttpError} from "../errorHandler/HttpError.js";
+
+export  const checkAccountById = (checkPathId:string[]): RequestHandler => {
+        return (req, res, next)=> {
+            const authReq = req as AuthRequest;
+            const route = authReq.method + authReq.path;
+            const roles = authReq.roles;
+            const isCheckedRoute = checkPathId.includes(route);
+            const isManager = roles?.includes(Roles.MNG);
+            const isHR = roles?.includes(Roles.HR);
+            const isCrew = roles?.includes(Roles.CREW);
+            const isOwnAccount = authReq.userId === authReq.body.id;
+
+            if (
+                !roles || !isCheckedRoute || isManager || isHR || (isCrew && isOwnAccount)
+            ) {
+                return next();
+            }
+            else throw new HttpError(403, "You can modify only your own account")
+        }
+    }
