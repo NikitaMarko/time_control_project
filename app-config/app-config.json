@@ -22,5 +22,6 @@
   },
   "checkIdRoutes": [
     "GET/employee/:id","PATCH/employee/password"
-  ]
+  ],
+  "loglevel": "info"
 }

@@ -30,7 +30,7 @@ export class AccountServiceImplMongo implements AccountingService {
     }
 
     async getEmployeeById(id: string): Promise<Employee> {
-        const employee = await EmployeeModel.findById(id).exec();
+        const employee = await EmployeeModel.findById(id);
         if (!employee)
             throw new HttpError(404, `Employee with id ${id} not found`);
         return employee;

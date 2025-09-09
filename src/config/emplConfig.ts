@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import appConf from "../../app-config/app-config.json" with { type: 'json' };
+import appConf from "../../app-config/app-config.json";
 
 
 
@@ -12,7 +12,8 @@ export interface AppConfig {
     jwt:{
         secret:string,
         exp:string|number
-    }
+    },
+    "loglevel":string
 
 }
 
