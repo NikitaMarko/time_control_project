@@ -1387,7 +1387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"firstName\": \"Ford\",\r\n  \"lastName\": \"Harisson\"\r\n}\r\n",
+							"raw": "{\r\n  \"firstName\": \"Mikky\",\r\n  \"lastName\": \"Fofs\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1395,7 +1395,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3023/employee/6817ef15-088e-4fa8-b9d4-df1a589c6443",
+							"raw": "http://localhost:3023/employee/ba56a283-ceb8-42ad-81b9-69937007e2aa",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1403,7 +1403,7 @@
 							"port": "3023",
 							"path": [
 								"employee",
-								"6817ef15-088e-4fa8-b9d4-df1a589c6443"
+								"ba56a283-ceb8-42ad-81b9-69937007e2aa"
 							]
 						}
 					},
@@ -1478,7 +1478,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3023/shift/activity",
+							"raw": "http://localhost:3023/shift/activity/TAB-1000000000001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1486,7 +1486,8 @@
 							"port": "3023",
 							"path": [
 								"shift",
-								"activity"
+								"activity",
+								"TAB-1000000000001"
 							]
 						}
 					},
@@ -1502,7 +1503,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\"\r\n}",
+							"raw": "{\r\n    \"crew_table_num\":\"TAB-1000000000002\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1534,7 +1535,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\"\r\n}",
+							"raw": "{\r\n    \"crew_table_num\":\"TAB-1000000000002\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1566,7 +1567,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"table_num\":\"TAB-1757156371744\",\r\n    \"breakDuration\":15\r\n}",
+							"raw": "{\r\n    \"crew_table_num\":\"TAB-1000000000001\",\r\n    \"breakDuration\":30\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1598,7 +1599,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"crew_table_num\":\"TAB-1757156371744\",\r\n    \"manager_table_num\":\"MNG-100000000\",\r\n    \"startShift\":1757272149229,\r\n    \"finishShift\":1757272149235\r\n}",
+							"raw": "{\r\n    \"crew_table_num\":\"TAB-1000000000002\",\r\n    \"manager_table_num\":\"MNG-100000000\",\r\n    \"startShift\":1751000000000,\r\n    \"finishShift\":1757100000000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
