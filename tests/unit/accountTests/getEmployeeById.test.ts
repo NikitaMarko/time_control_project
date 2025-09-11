@@ -2,6 +2,11 @@ import {accountEmplServiceMongo} from "../../../src/services/AccountServiceImplM
 import {HttpError} from "../../../src/errorHandler/HttpError.ts";
 import {EmployeeModel} from "../../../src/model/EmployeeMongooseSchema.ts";
 jest.mock("../../../src/model/EmployeeMongooseSchema.ts")
+jest.mock('../../app-config/app-config.json', () => ({
+    default: {
+        SOME_MOCK_KEY: 'mock_value'
+    }
+}));
 describe('AccountServiceMongoImpl.getEmployeeById', () => {
     test('Failed test: employee not found', async () => {
         const service = accountEmplServiceMongo;

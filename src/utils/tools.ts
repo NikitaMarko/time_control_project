@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import {HttpError} from "../errorHandler/HttpError.js";
 import { v4 as uuidv4 } from 'uuid';
 
+
 function generateTabNumber() {
     return "TAB-" + Date.now()
 }
@@ -50,3 +51,5 @@ export const checkRole = (role:string) => {
     if(!newRole) throw new HttpError(400, "Wrong role!");
     return newRole;
 }
+export const generateShiftId = () =>
+    Math.trunc(Math.random()*10000) + 1

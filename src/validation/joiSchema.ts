@@ -1,10 +1,10 @@
 import Joi from "joi";
 
 export const shiftSchema = Joi.object({
-    table_num:Joi.string().required()
+    crew_table_num:Joi.string().required()
 })
 export const breaksSchema = Joi.object({
-    table_num:Joi.string().required(),
+    crew_table_num:Joi.string().required(),
     breakDuration:Joi.number().required()
 })
 export const correctShiftSchema = Joi.object({

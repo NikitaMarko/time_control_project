@@ -107,7 +107,6 @@ const config: Config = {
 
   // A preset that is used as a base for Jest's configuration
   preset: 'ts-jest',
-
   // Run tests from one or more projects
   // projects: undefined,
 
@@ -151,6 +150,10 @@ const config: Config = {
 
   // The test environment that will be used for testing
   testEnvironment: "jest-environment-node",
+  transform: {
+    '^.+\\.[tj]sx?$': ['ts-jest', { tsconfig: 'tsconfig.jest.json' }]
+  },
+
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

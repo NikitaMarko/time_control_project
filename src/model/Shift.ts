@@ -1,20 +1,20 @@
 
+export type TabNumTimeTypeDto = {
+    crew_table_num:string,
+    time:string
+}
+
 export type CrewShift = {
-    shift_id:number,
+    _id:number,
     startShift:number,
-    finishShift:number,
-    table_num:string,
+    finishShift:number|null,
+    crew_table_num:string,
     shiftDuration:number,
     breaks:number,
     correct:string|null,
-    monthHours:number
-}
-
-export type CurrentCrewShift = {
-    shift_id:number,
-    startShift:number,
-    table_num:string,
-    breaks:number
+    monthHours:number,
+    manager_table_num?: string,
+    date?: string;
 }
 
 export type ShiftCorrection = {

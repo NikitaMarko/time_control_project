@@ -1,21 +1,20 @@
 import {ShiftControlService} from "./ShiftControlService.js";
-import {CurrentCrewShift, ShiftCorrection} from "../model/Shift.js";
+import {CrewShift, ShiftCorrection, TabNumTimeTypeDto} from "../model/Shift.js";
 import {
-    CrewShiftMongoModel,
-    CurrCrewShiftMongoModel,
-    ShiftCorrectionMongooseModel
+    ShiftMongoModel
 } from "../model/ShiftMongooseSchema.js";
 import {HttpError} from "../errorHandler/HttpError.js";
+import {generateShiftId} from "../utils/tools.js";
 
 export class ShiftControlServiceImplMongo implements ShiftControlService {
 
-    async breaks(table_num: string, breakDuration: number): Promise<void> {
-        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num});
+    async breaks(crew_table_num: string, breakDuration: number): Promise<void> {
+        const currentShift = await ShiftMongoModel.findOne({crew_table_num});
         if (!currentShift)
-            throw new HttpError(404, `No find active shift for ${table_num}`)
+            throw new HttpError(404, `No find active shift for ${crew_table_num}`)
         const break15 = 15;
         const break30 = 30;
-        if(![break15, break30].includes(breakDuration)){
+        if (![break15, break30].includes(breakDuration)) {
             throw new HttpError(400, `You can take a break of only 15 or 30 minutes`)
         }
         currentShift.breaks += breakDuration;
@@ -24,73 +23,96 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
     }
 
     async correctShift(correct: ShiftCorrection): Promise<void> {
-        const currentShift = await CrewShiftMongoModel.findOne({table_num:correct.crew_table_num})
+        const currentShift = await ShiftMongoModel.findOne({crew_table_num:correct.crew_table_num})
         if (!currentShift)
             throw new HttpError(404, `No find active shift for ${correct.crew_table_num}`)
-        const now = new Date();
-        const finishShift = correct.finishShift ?? now;
+        const now = Date.now();
+        const finish = correct.finishShift ?? now;
 
-        const correctionShift = new ShiftCorrectionMongooseModel({
-            crew_table_num: correct.crew_table_num,
-            manager_table_num: correct.manager_table_num,
-            startShift:correct.startShift,
-            finishShift:finishShift,
-            date:now.toISOString()
-        })
-        await correctionShift.save()
+        const { quantityShift } = await this.getCurrentActivityShift(correct.crew_table_num);
+
+        const start = correct.startShift;
+        const duration = (finish - start) / 60000;
+        const monthHours = (duration * quantityShift) / 60;
+
+        await ShiftMongoModel.updateOne(
+            {_id: currentShift._id},
+            {
+                $set: {
+                    startShift: start,
+                    finishShift: finish,
+                    manager_table_num: correct.manager_table_num,
+                    correct: correct.manager_table_num,
+                    date: correct.date ?? new Date().toISOString().split('T')[0],
+                    shiftDuration: duration,
+                    monthHours: monthHours,
+                    breaks: currentShift.breaks ?? 0
+
+                }
+            }
+        );
     }
 
-    async finishShift(table_num: string): Promise<{ table_num: string; time: number }> {
-        const currentShift = await CurrCrewShiftMongoModel.findOne({table_num});
+    async finishShift(crew_table_num: string): Promise<TabNumTimeTypeDto> {
+        const currentShift = await ShiftMongoModel.findOne({crew_table_num});
         if (!currentShift) {
-            throw new HttpError(404, `No find active shift for ${table_num}`);
+            throw new HttpError(404, `No find active shift for ${crew_table_num}`);
         }
-        const {quantityShift} = await this.getCurrentActivityShift(table_num);
+        const {quantityShift} = await this.getCurrentActivityShift(crew_table_num);
         const finish = Date.now();
 
         const duration = ((finish - currentShift.startShift) - (currentShift.breaks*60000))/60000;
         const monthHours = (duration*quantityShift)/60;
 
-        const result = new CrewShiftMongoModel({
-            shift_id:currentShift.shift_id,
-            startShift:currentShift.startShift,
-            finishShift:finish,
-            table_num:currentShift.table_num,
-            shiftDuration: duration,
-            breaks:currentShift.breaks,
-            correct:null,
-            monthHours:monthHours
-        })
-        await result.save();
-        await CurrCrewShiftMongoModel.deleteOne({table_num});
-        return {table_num, time: finish};
+        await ShiftMongoModel.updateOne(
+            { _id: currentShift._id },
+            {
+                $set: {
+                    startShift: currentShift.startShift,
+                    finishShift: finish,
+                    crew_table_num: currentShift.crew_table_num,
+                    shiftDuration: duration,
+                    breaks: currentShift.breaks,
+                    monthHours: monthHours,
+                    correct: currentShift.correct ?? null,
+                    manager_table_num: currentShift.manager_table_num ?? null,
+                    date: currentShift.date ?? new Date().toISOString(),
+                }
+            }
+        );
+
+        return {crew_table_num, time: finish.toString()};
     }
 
-    async getCurrentShiftStaff(): Promise<CurrentCrewShift[]> {
-        return CurrCrewShiftMongoModel.find();
+    async getCurrentShiftStaff(): Promise<CrewShift[]> {
+        return ShiftMongoModel.find();
     }
 
-    async startShift(table_num: string): Promise<{ table_num: string; time: number }> {
-        const isExistShift = await CurrCrewShiftMongoModel.findOne({table_num})
-        if (isExistShift) throw new HttpError(400, `Already have shift for crew with ${table_num}`);
+    async startShift(crew_table_num: string): Promise<TabNumTimeTypeDto> {
+        const isExistShift = await ShiftMongoModel.findOne({crew_table_num})
+        if (isExistShift) throw new HttpError(400, `Already have shift for crew with ${crew_table_num}`);
         const now = Date.now();
 
-        const startShift =  new CurrCrewShiftMongoModel({
-            shift_id: now,
+        const startShift =  new ShiftMongoModel({
+            _id: Number(generateShiftId()),
             startShift: now,
-            table_num,
+            finishShift:null,
+            crew_table_num,
+            shiftDuration:null,
             breaks:0
         })
         await startShift.save();
 
-        return { table_num, time: now };
+        return { crew_table_num, time: now.toString() };
     }
-    async getCurrentActivityShift(table_num?:string): Promise<{ quantityShift: number }> {
-        const filter = table_num?{table_num}:{};
-        const temp = await CurrCrewShiftMongoModel.find(filter);
-        return {quantityShift:temp.length}
+    async getCurrentActivityShift(crew_table_num?:string): Promise<{ quantityShift: number }> {
+        const filter = {crew_table_num};
+        const temp = await ShiftMongoModel.find(filter);
+        if (temp.length === 0) {
+            return { quantityShift: 0 };
+        }
+        return { quantityShift: temp.length };
     }
-
 }
 
 export const ShiftControlServiceMongo = new ShiftControlServiceImplMongo();

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import appConf from "../../app-config/app-config.json";
+import appConf from "../../app-config/app-config.json" with { type: "json" };
 
 
 

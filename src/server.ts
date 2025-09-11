@@ -6,7 +6,6 @@ import morgan from "morgan";
 import {errorHandler} from "./errorHandler/errorHandler.js";
 import {employeeRouter} from "./routes/emplRouter.js";
 import {shiftCtrlRouter} from "./routes/shiftCtrlRouter.js";
-import {checkAccountById} from "./middleware/authorization.js";
 
 export const launchServer = () => {
     //===========load environments==============
@@ -23,7 +22,7 @@ export const launchServer = () => {
     // app.use(authenticate(accountServiceMongo));
     // app.use(skipRoutes(configuration.skipRoutes));
     // app.use(authorize(configuration.pathRoles as Record<string, Roles[]>));
-    app.use(checkAccountById(configuration.checkIdRoutes));
+    // app.use(checkAccountById(configuration.checkIdRoutes));
 
 //==================Router====================
     app.use('/employee', employeeRouter)

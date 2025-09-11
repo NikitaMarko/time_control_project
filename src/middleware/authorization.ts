@@ -1,7 +1,8 @@
-//
-// import {RequestHandler} from "express";
-// import {HttpError} from "../errorHandler/HttpError.js";
-//
+import {RequestHandler} from "express";
+import {AuthRequest} from "../utils/emplTypes.js";
+import {Roles} from "../model/Employee.js";
+import {HttpError} from "../errorHandler/HttpError.js";
+
 // export const authorize = (pathRoles: Record<string, Roles[]>): RequestHandler => {
 //     return (req, res, next) => {
 //         const authReq = req as AuthRequest;
@@ -17,10 +18,7 @@
 //     };
 // };
 //
-import {RequestHandler} from "express";
-import {AuthRequest} from "../utils/emplTypes.js";
-import {Roles} from "../model/Employee.js";
-import {HttpError} from "../errorHandler/HttpError.js";
+
 
 export  const checkAccountById = (checkPathId:string[]): RequestHandler => {
         return (req, res, next)=> {
@@ -38,6 +36,6 @@ export  const checkAccountById = (checkPathId:string[]): RequestHandler => {
             ) {
                 return next();
             }
-            else throw new HttpError(403, "You can modify only your own account")
+            else return next (new HttpError(403, "You can modify only your own account"))
         }
     }

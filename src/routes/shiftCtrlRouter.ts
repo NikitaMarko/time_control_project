@@ -5,7 +5,7 @@ import {breaksSchema, correctShiftSchema, shiftSchema} from "../validation/joiSc
 
 export const shiftCtrlRouter = express.Router();
 
-shiftCtrlRouter.get('/activity',controller.getCurrentActivityShift);
+shiftCtrlRouter.get('/activity/:crew_table_num',controller.getCurrentActivityShift);
 shiftCtrlRouter.get('/staff',controller.getCurrentShiftStaff);
 shiftCtrlRouter.put('/correct',bodyValidation(correctShiftSchema),controller.correctShift);
 shiftCtrlRouter.patch('/breaks',bodyValidation(breaksSchema),controller.breaks);
