@@ -2,7 +2,7 @@ import {AccountingService} from "./AccountService.js";
 import {Employee, EmployeeDto, Roles, SavedFiredEmployee} from "../model/Employee.js";
 import {EmployeeModel, FiredEmployeeModel} from "../model/EmployeeMongooseSchema.js";
 import {HttpError} from "../errorHandler/HttpError.js";
-import {convertEmployeeToFiredEmployee} from "../utils/tools.js";
+import {checkFiredEmployees, convertEmployeeToFiredEmployee} from "../utils/tools.js";
 import bcrypt from "bcrypt";
 
 
@@ -30,7 +30,7 @@ export class AccountServiceImplMongo implements AccountingService {
     }
 
     async getEmployeeById(id: string): Promise<Employee> {
-        const employee = await EmployeeModel.findById(id);
+        const employee = await EmployeeModel.findById(id).exec();
         if (!employee)
             throw new HttpError(404, `Employee with id ${id} not found`);
         return employee;
@@ -39,6 +39,7 @@ export class AccountServiceImplMongo implements AccountingService {
     async hireEmployee(employee: Employee): Promise<Employee> {
         const temp = await EmployeeModel.findById(employee._id).exec();
         if (temp) throw new HttpError(409, `Employee with id ${employee._id} already exists`);
+        await checkFiredEmployees(employee._id)
         const empDoc = new EmployeeModel(employee);
         await empDoc.save();
         return employee;

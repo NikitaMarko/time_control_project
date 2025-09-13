@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import appConf from "../../app-config/app-config.json" with { type: "json" };
-
+// @ts-ignore
+import appConf from "../../app-config/app-config.json"
 
 
 export interface AppConfig {

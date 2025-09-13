@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {HttpError} from "../errorHandler/HttpError.js";
 import { v4 as uuidv4 } from 'uuid';
+import {FiredEmployeeModel} from "../model/EmployeeMongooseSchema.js";
 
 
 function generateTabNumber() {
@@ -52,4 +53,9 @@ export const checkRole = (role:string) => {
     return newRole;
 }
 export const generateShiftId = () =>
-    Math.trunc(Math.random()*10000) + 1
+    Math.trunc(Math.random()*10000) + 1;
+
+export const checkFiredEmployees = async(id:string) => {
+    if(await FiredEmployeeModel.findOne({id}))
+        throw new HttpError(409,  "This employee was fired");
+}

@@ -1,10 +1,13 @@
-
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "types": ["jest"],
+    "module": "nodenext",              // для ESM в Node.js 18+
+    "moduleResolution": "nodenext",    // для корректного разрешения модулей
+    "target": "es2022",                // современный таргет
+    "resolveJsonModule": true,
+    "isolatedModules": true,           // обязательно для ts-jest + ESM
+    "esModuleInterop": true,           // полезно для совместимости
+    "types": ["jest"],                 // типы для Jest
     "allowJs": true
   },
   "include": ["src", "**/*.test.ts"]
