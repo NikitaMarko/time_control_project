@@ -1,5 +1,4 @@
 import {ShiftControlServiceMongo} from "../../../src/services/ShiftControlServiceImplMongo.js";
-import {CrewShift} from "../../../src/model/Shift.js";
 import {ShiftMongoModel} from "../../../src/model/ShiftMongooseSchema.js";
 
 jest.mock("../../../src/model/ShiftMongooseSchema.js");
