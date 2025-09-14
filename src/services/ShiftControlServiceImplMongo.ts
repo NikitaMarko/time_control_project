@@ -90,7 +90,7 @@ export class ShiftControlServiceImplMongo implements ShiftControlService {
 
     async startShift(crew_table_num: string): Promise<TabNumTimeTypeDto> {
         const isExistShift = await ShiftMongoModel.findOne({crew_table_num})
-        if (isExistShift) throw new HttpError(400, `Already have shift for crew with ${crew_table_num}`);
+        if (isExistShift) throw new HttpError(409, `Already have shift for crew with ${crew_table_num}`);
         const now = Date.now();
 
         const startShift =  new ShiftMongoModel({
