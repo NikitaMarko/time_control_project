@@ -6,6 +6,9 @@ import morgan from "morgan";
 import {errorHandler} from "./errorHandler/errorHandler.js";
 import {employeeRouter} from "./routes/emplRouter.js";
 import {shiftCtrlRouter} from "./routes/shiftCtrlRouter.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDoc from "../docs/openapi.json" with { type: 'json' };
+
 
 export const launchServer = () => {
     //===========load environments==============
@@ -23,7 +26,12 @@ export const launchServer = () => {
     // app.use(skipRoutes(configuration.skipRoutes));
     // app.use(authorize(configuration.pathRoles as Record<string, Roles[]>));
     // app.use(checkAccountById(configuration.checkIdRoutes));
-
+//============Swagger Docs================
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc,{
+        swaggerOptions:{
+            supportedSubmitMethods:[]
+        }
+    }));
 //==================Router====================
     app.use('/employee', employeeRouter)
     app.use('/shift', shiftCtrlRouter)

@@ -7,7 +7,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,           // обязательно для ts-jest + ESM
     "esModuleInterop": true,           // полезно для совместимости
-    "types": ["jest"],                 // типы для Jest
+    "types": ["jest"],
+    // типы для Jest
     "allowJs": true
   },
   "include": ["src", "**/*.test.ts"]

@@ -1,0 +1,136 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Time Control API",
+    "description": "Web API for small business time contrilling",
+    "version": "1.0.0"
+  },
+  "servers": [{
+    "url": "http://localhost:3023",
+    "description": "Development local server"
+  }],
+  "paths": {
+    "/account": {
+      "get": {
+        "summary": "Get all employees list",
+        "description": "Returns a list of all employees in the system.",
+        "tags": ["Employees"],
+        "responses": {
+          "200": {
+            "description": "Array of employees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/employee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Fire Employee",
+        "description": "Endpoint to fire an employee by ID.",
+        "tags": ["Employees"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fired employee details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/employee"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Hire Employee",
+        "description": "Endpoint to hire a new employee.",
+        "tags": ["Employees"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/employee_hired"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully hired employee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/employee_dto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request payload"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "employee": {
+        "type": "object",
+        "required": ["_id", "firstName", "lastName", "tab_num"],
+        "properties": {
+          "_id": { "type": "string", "example": "123456789" },
+          "firstName": { "type": "string", "example": "John" },
+          "lastName": { "type": "string", "example": "Snow" },
+          "tab_num": { "type": "string", "example": "EnrGt-3455-89" }
+        }
+      },
+      "employee_dto": {
+        "type": "object",
+        "required": ["id", "firstName", "lastName", "password"],
+        "properties": {
+          "id": { "type": "string", "example": "123456789" },
+          "firstName": { "type": "string", "example": "John" },
+          "lastName": { "type": "string", "example": "Snow" },
+          "password": { "type": "string", "example": "Drft5454" }
+        }
+      },
+      "employee_hired": {
+        "type": "object",
+        "required": ["_id", "firstName", "lastName", "tab_num", "hash", "roles"],
+        "properties": {
+          "_id": { "type": "string", "example": "123456789" },
+          "firstName": { "type": "string", "example": "John" },
+          "lastName": { "type": "string", "example": "Snow" },
+          "tab_num": { "type": "string", "example": "Drf-t54-54" },
+          "hash": { "type": "string", "example": "ewfefef44ff46" },
+          "roles": {
+            "type": "string",
+            "enum": ["crew", "manager", "admin"],
+            "example": "crew"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,11 @@
-import {configuration} from "../config/emplConfig.js";
 import {Employee, EmployeeDto, Roles, SavedFiredEmployee} from "../model/Employee.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {HttpError} from "../errorHandler/HttpError.js";
 import { v4 as uuidv4 } from 'uuid';
 import {FiredEmployeeModel} from "../model/EmployeeMongooseSchema.js";
+import {configuration} from "../config/emplConfig.js";
+
 
 
 function generateTabNumber() {
